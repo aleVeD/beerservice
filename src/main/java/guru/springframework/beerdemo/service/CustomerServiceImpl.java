@@ -23,4 +23,9 @@ public class CustomerServiceImpl implements CustomerService {
 
   }
 
+  @Override
+  public void deleteCustomerById(UUID customerDto) {
+
+  }
+
 }

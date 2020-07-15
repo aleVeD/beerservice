@@ -7,6 +7,9 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
+import static guru.springframework.beerdemo.web.model.BeerStyleEnum.CORONA;
+import static guru.springframework.beerdemo.web.model.BeerStyleEnum.GUINNESS;
+
 @Component
 public class BeerLoader implements CommandLineRunner {
 
@@ -25,18 +28,16 @@ public class BeerLoader implements CommandLineRunner {
     if(beerRepository.count() == 0){
       beerRepository.save(Beer.builder()
               .beerName("Corona")
-              .beerStyle("dorada")
-              .quantityToBrew(200)
-              .minOnHand(12)
+              .beerStyleEnum(CORONA)
+              .quantityOnHand(200)
               .upc(28146192L)
               .price(new BigDecimal("8686.726"))
               .build());
 
       beerRepository.save(Beer.builder()
               .beerName("Escudo")
-              .beerStyle("negra")
-              .quantityToBrew(300)
-              .minOnHand(14)
+              .beerStyleEnum(GUINNESS)
+              .quantityOnHand(300)
               .upc(2886546192L)
               .price(new BigDecimal("9886.322"))
               .build());

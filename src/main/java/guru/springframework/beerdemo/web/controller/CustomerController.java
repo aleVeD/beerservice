@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 @RequestMapping("/api/v1/customer")
@@ -25,7 +26,7 @@ public class CustomerController {
   }
 
   @PostMapping
-  public ResponseEntity<CustomerDto> handlePost(@RequestBody CustomerDto customerDto){
+  public ResponseEntity<CustomerDto> handlePost(@Valid @RequestBody CustomerDto customerDto){
     CustomerDto cus = customerService.saveNewCustomer(customerDto);
     HttpHeaders httpHeaders = new HttpHeaders();
     httpHeaders.add("location", "/api/v1/customer/"+ cus.getId().toString());
@@ -34,12 +35,14 @@ public class CustomerController {
 
   @PutMapping("/{customerId}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void handleUpdate(@RequestBody CustomerDto customerDto, @PathVariable("customerId") UUID customerId){
+  public void handleUpdate(@Valid @RequestBody CustomerDto customerDto, @PathVariable("customerId") UUID customerId){
     customerService.updateCustomer(customerId, customerDto);
   }
 
   @DeleteMapping("/{customerId}")
   public void handleDelete(@PathVariable("customerId") UUID customerId){
-
+    customerService.deleteCustomerById(customerId);
   }
+
+
 }

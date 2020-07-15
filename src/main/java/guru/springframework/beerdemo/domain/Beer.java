@@ -1,5 +1,6 @@
 package guru.springframework.beerdemo.domain;
 
+import guru.springframework.beerdemo.web.model.BeerStyleEnum;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 @Getter
@@ -28,18 +30,19 @@ public class Beer {
 
   @CreationTimestamp
   @Column(updatable = false)
-  private Timestamp createdDate;
+  private OffsetDateTime dateCreated;
 
   @UpdateTimestamp
-  private Timestamp lastModifiedDate;
+  @Column(name = "update")
+  private OffsetDateTime lastModifiedDate;
 
   private String beerName;
-  private String beerStyle;
+  private BeerStyleEnum beerStyleEnum;
 
   @Column(unique = true)
   private Long upc;
   private BigDecimal price;
-  private Integer minOnHand;
-  private Integer quantityToBrew;
+  private Integer quantityOnHand;
+
 
 }
