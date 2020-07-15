@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 import java.util.UUID;
@@ -30,11 +31,11 @@ public class Beer {
 
   @CreationTimestamp
   @Column(updatable = false)
-  private OffsetDateTime dateCreated;
+  private Timestamp dateCreated;
 
   @UpdateTimestamp
   @Column(name = "update")
-  private OffsetDateTime lastModifiedDate;
+  private Timestamp lastModifiedDate;
 
   private String beerName;
   private BeerStyleEnum beerStyleEnum;

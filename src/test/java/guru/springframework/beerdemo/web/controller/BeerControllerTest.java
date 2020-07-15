@@ -3,6 +3,7 @@ package guru.springframework.beerdemo.web.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.beerdemo.service.BeerService;
 import guru.springframework.beerdemo.web.model.BeerDto;
+import guru.springframework.beerdemo.web.model.BeerStyleEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,6 +16,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 import static guru.springframework.beerdemo.web.model.BeerStyleEnum.HEINEKEN;
@@ -79,7 +81,7 @@ public class BeerControllerTest {
   @Test
   public void handleUpdate() throws Exception {
     //given
-    BeerDto beerDto = validBeer;
+    BeerDto beerDto = getValidBeerDto();
     beerDto.setId(null);
     String beerDtoJson = objectMapper.writeValueAsString(beerDto);
 
@@ -91,5 +93,14 @@ public class BeerControllerTest {
 
     then(beerService).should().updateBeer(any(), any());
 
+  }
+
+  BeerDto getValidBeerDto(){
+    return BeerDto.builder()
+            .beerName("nuevo")
+            .beerStyleEnum(HEINEKEN)
+            .price(new BigDecimal("646.67"))
+            .upc(57657L)
+            .build();
   }
 }
