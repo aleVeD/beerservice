@@ -13,7 +13,7 @@ One showing how to make a request using cURL:
 
 include::{snippets}/orders/curl-request.adoc[]
 
-One showing the HTTP request:
+One showing th HTTP request:
 
 include::{snippets}/orders/http-request.adoc[]
 
